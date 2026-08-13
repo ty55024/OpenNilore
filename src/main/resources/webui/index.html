@@ -4,12 +4,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
-  <title>WebUI</title>
-  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <title>WebUI · 远程控制</title>
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *, ::after, ::before { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg: #0b0a10;
@@ -33,11 +40,13 @@
       --radius: 10px;
       --radius-lg: 14px;
       --radius-xl: 20px;
-      --shadow-card: 0 2px 12px rgba(0,0,0,0.3);
-      --shadow-hover: 0 8px 30px rgba(0,0,0,0.45);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.45);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
@@ -48,11 +57,18 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 4px; }
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-light);
+      border-radius: 4px;
+    }
 
-    /* ===== Ambient BG ===== */
+    /* ===== 背景光晕 ===== */
     #ambient {
       position: fixed;
       inset: 0;
@@ -68,33 +84,48 @@
       animation: orbFloat 20s ease-in-out infinite;
     }
     #ambient .orb:nth-child(1) {
-      width: 400px; height: 400px;
+      width: 400px;
+      height: 400px;
       background: #7c3aed;
-      top: -10%; left: -5%;
+      top: -10%;
+      left: -5%;
       animation-delay: 0s;
     }
     #ambient .orb:nth-child(2) {
-      width: 350px; height: 350px;
+      width: 350px;
+      height: 350px;
       background: #ec4899;
-      bottom: -15%; right: -5%;
+      bottom: -15%;
+      right: -5%;
       animation-delay: -7s;
     }
     #ambient .orb:nth-child(3) {
-      width: 250px; height: 250px;
+      width: 250px;
+      height: 250px;
       background: #06b6d4;
-      top: 40%; right: 20%;
+      top: 40%;
+      right: 20%;
       animation-delay: -14s;
     }
     @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.08); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -30px) scale(1.08);
+      }
+      66% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
     }
 
-    /* ===== Top Bar ===== */
+    /* ===== 顶部栏 ===== */
     #topbar {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 56px;
       z-index: 40;
       background: rgba(11, 10, 16, 0.82);
@@ -108,7 +139,8 @@
     }
 
     .icon-btn {
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius);
       display: flex;
       align-items: center;
@@ -120,8 +152,13 @@
       transition: background 0.15s, color 0.15s, transform 0.1s;
       flex-shrink: 0;
     }
-    .icon-btn:hover { background: var(--primary-dim); color: var(--primary); }
-    .icon-btn:active { transform: scale(0.9); }
+    .icon-btn:hover {
+      background: var(--primary-dim);
+      color: var(--primary);
+    }
+    .icon-btn:active {
+      transform: scale(0.9);
+    }
 
     .brand {
       display: flex;
@@ -130,7 +167,8 @@
       flex-shrink: 0;
     }
     .brand-logo {
-      width: 30px; height: 30px;
+      width: 30px;
+      height: 30px;
       border-radius: var(--radius);
       background: linear-gradient(135deg, var(--primary), var(--accent));
       display: flex;
@@ -146,7 +184,7 @@
       position: absolute;
       inset: 0;
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
     }
     .brand-name {
       font-weight: 700;
@@ -162,7 +200,9 @@
       font-weight: 600;
     }
 
-    .spacer { flex: 1; }
+    .spacer {
+      flex: 1;
+    }
 
     .conn-pill {
       display: flex;
@@ -177,19 +217,32 @@
       color: var(--text-muted);
     }
     .conn-dot {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       transition: background 0.3s;
     }
-    .conn-dot.on { background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .conn-dot.off { background: var(--red); box-shadow: 0 0 6px var(--red); }
-    .conn-text.on { color: var(--green); }
-    .conn-text.off { color: var(--red); }
+    .conn-dot.on {
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+    .conn-dot.off {
+      background: var(--red);
+      box-shadow: 0 0 6px var(--red);
+    }
+    .conn-text.on {
+      color: var(--green);
+    }
+    .conn-text.off {
+      color: var(--red);
+    }
 
-    /* ===== Tabs bar ===== */
+    /* ===== 标签栏 ===== */
     #tabs {
       position: fixed;
-      top: 56px; left: 0; right: 0;
+      top: 56px;
+      left: 0;
+      right: 0;
       height: 44px;
       z-index: 39;
       background: rgba(11, 10, 16, 0.75);
@@ -202,7 +255,9 @@
       overflow-x: auto;
       border-bottom: 1px solid var(--border);
     }
-    #tabs::-webkit-scrollbar { height: 0; }
+    #tabs::-webkit-scrollbar {
+      height: 0;
+    }
 
     .tab-btn {
       padding: 6px 14px;
@@ -218,13 +273,16 @@
       transition: background 0.2s, color 0.2s;
       flex-shrink: 0;
     }
-    .tab-btn:hover { color: var(--text-muted); background: var(--primary-dim); }
+    .tab-btn:hover {
+      color: var(--text-muted);
+      background: var(--primary-dim);
+    }
     .tab-btn.active {
       color: var(--primary);
       background: var(--primary-glow);
     }
 
-    /* ===== Main ===== */
+    /* ===== 主区域 ===== */
     main {
       margin-top: 100px;
       padding: 16px 16px 40px;
@@ -244,7 +302,10 @@
       transform: translateY(-6px);
       transition: opacity 0.3s, transform 0.3s;
     }
-    .cat-header.show { opacity: 1; transform: translateY(0); }
+    .cat-header.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .cat-header h2 {
       font-size: 18px;
       font-weight: 700;
@@ -261,14 +322,14 @@
       border: 1px solid var(--border);
     }
 
-    /* ===== Grid ===== */
+    /* ===== 卡片网格 ===== */
     .module-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 10px;
     }
 
-    /* ===== Card ===== */
+    /* ===== 模块卡片 ===== */
     .module-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -301,7 +362,9 @@
     .module-card.enabled::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 2px;
       background: linear-gradient(90deg, var(--primary), var(--accent));
       opacity: 0.8;
@@ -313,14 +376,18 @@
 
     .card-glow {
       position: absolute;
-      top: -50%; right: -50%;
-      width: 100%; height: 100%;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
       background: radial-gradient(circle, rgba(183, 148, 255, 0.06) 0%, transparent 70%);
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.5s;
     }
-    .module-card.enabled .card-glow { opacity: 1; }
+    .module-card.enabled .card-glow {
+      opacity: 1;
+    }
 
     .card-row1 {
       display: flex;
@@ -366,7 +433,7 @@
       color: var(--red);
     }
 
-    /* Toggle */
+    /* 切换开关 */
     .toggle {
       position: relative;
       display: inline-flex;
@@ -375,10 +442,13 @@
     }
     .toggle input {
       position: absolute;
-      opacity: 0; width: 0; height: 0;
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
     .toggle-track {
-      width: 38px; height: 22px;
+      width: 38px;
+      height: 22px;
       background: #2a2538;
       border-radius: 999px;
       transition: background 0.25s;
@@ -386,24 +456,27 @@
     }
     .toggle-thumb {
       position: absolute;
-      top: 3px; left: 3px;
-      width: 16px; height: 16px;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: var(--text-dim);
       transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.25s;
     }
-    .toggle input:checked + .toggle-track {
+    .toggle input:checked+.toggle-track {
       background: var(--primary);
     }
-    .toggle input:checked + .toggle-track .toggle-thumb {
+    .toggle input:checked+.toggle-track .toggle-thumb {
       transform: translateX(16px);
       background: #fff;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
 
-    /* Gear */
+    /* 齿轮按钮 */
     .gear-btn {
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -416,12 +489,22 @@
       transition: background 0.15s, opacity 0.2s, color 0.15s;
       flex-shrink: 0;
     }
-    .module-card:hover .gear-btn { opacity: 0.6; }
-    .gear-btn:hover { opacity: 1 !important; background: var(--primary-dim); color: var(--primary); }
-    .gear-btn svg { transition: transform 0.4s; }
-    .gear-btn:hover svg { transform: rotate(60deg); }
+    .module-card:hover .gear-btn {
+      opacity: 0.6;
+    }
+    .gear-btn:hover {
+      opacity: 1 !important;
+      background: var(--primary-dim);
+      color: var(--primary);
+    }
+    .gear-btn svg {
+      transition: transform 0.4s;
+    }
+    .gear-btn:hover svg {
+      transform: rotate(60deg);
+    }
 
-    /* ===== Slider ===== */
+    /* 滑块 */
     input[type=range] {
       -webkit-appearance: none;
       appearance: none;
@@ -435,11 +518,12 @@
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px; height: 18px;
+      width: 18px;
+      height: 18px;
       background: var(--primary);
       border-radius: 50%;
       border: 2px solid var(--bg-card);
-      box-shadow: 0 0 0 1px var(--primary), 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 0 0 1px var(--primary), 0 2px 8px rgba(0, 0, 0, 0.4);
       transition: box-shadow 0.2s, transform 0.15s;
       cursor: pointer;
     }
@@ -448,8 +532,16 @@
       box-shadow: 0 0 0 4px var(--primary-glow), 0 0 0 1px var(--primary);
     }
 
-    .slider-group { display: flex; flex-direction: column; gap: 6px; }
-    .slider-hdr { display: flex; justify-content: space-between; align-items: center; }
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .slider-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .slider-val {
       font-size: 12px;
       font-weight: 700;
@@ -459,7 +551,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* ===== Select ===== */
+    /* 下拉选择 */
     .m3-select {
       background: var(--bg);
       color: var(--text);
@@ -479,28 +571,40 @@
       background-position: right 10px center;
       padding-right: 30px;
     }
-    .m3-select:focus { border-color: var(--primary); }
-    .m3-select option { background: var(--bg-card); }
+    .m3-select:focus {
+      border-color: var(--primary);
+    }
+    .m3-select option {
+      background: var(--bg-card);
+    }
 
-    /* ===== Dialog ===== */
+    /* 弹窗 */
     #dialog-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       z-index: 50;
       align-items: center;
       justify-content: center;
     }
-    #dialog-backdrop.open { display: flex; }
+    #dialog-backdrop.open {
+      display: flex;
+    }
     #dialog-backdrop.open #dialog {
       animation: dialogPop 0.3s cubic-bezier(0.34, 1.4, 0.64, 1) both;
     }
     @keyframes dialogPop {
-      from { opacity: 0; transform: scale(0.9) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
     #dialog {
       background: var(--bg-card);
@@ -510,7 +614,7 @@
       max-width: 360px;
       margin: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     }
     .dialog-hdr {
       display: flex;
@@ -518,8 +622,19 @@
       justify-content: space-between;
       padding: 18px 20px 0;
     }
-    .dialog-hdr-text { font-size: 10px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-    .dialog-hdr-title { font-size: 16px; font-weight: 700; color: var(--text); }
+    .dialog-hdr-text {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .dialog-hdr-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
     .dialog-body {
       padding: 16px 20px 20px;
       max-height: 55vh;
@@ -546,10 +661,14 @@
       color: #fff;
       transition: box-shadow 0.2s, transform 0.1s;
     }
-    .btn-primary:hover { box-shadow: 0 4px 16px var(--primary-glow); }
-    .btn-primary:active { transform: scale(0.97); }
+    .btn-primary:hover {
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+    .btn-primary:active {
+      transform: scale(0.97);
+    }
 
-    /* ===== Setting rows ===== */
+    /* 设置行 */
     .setting-row {
       display: flex;
       align-items: center;
@@ -568,7 +687,7 @@
       gap: 6px;
     }
 
-    /* ===== Snackbar ===== */
+    /* 轻提示 */
     #snackbar {
       position: fixed;
       bottom: 20px;
@@ -582,54 +701,75 @@
       padding: 10px 18px;
       font-size: 12px;
       font-weight: 500;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s, transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
       max-width: 320px;
       text-align: center;
     }
-    #snackbar.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    #snackbar.error { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+    #snackbar.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    #snackbar.error {
+      border-color: var(--red);
+      background: var(--red-bg);
+      color: var(--red);
+    }
 
-    /* ===== Responsive ===== */
+    /* ===== 响应式 ===== */
     @media (max-width: 640px) {
-      .module-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .module-card { padding: 12px; }
+      .module-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .module-card {
+        padding: 12px;
+      }
     }
     @media (max-width: 420px) {
-      .module-grid { grid-template-columns: 1fr; }
-      main { padding: 12px; }
-      .conn-pill { padding: 3px 8px; font-size: 10px; }
-      .brand-sub { display: none; }
+      .module-grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding: 12px;
+      }
+      .conn-pill {
+        padding: 3px 8px;
+        font-size: 10px;
+      }
+      .brand-sub {
+        display: none;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Ambient orbs -->
+  <!-- 背景光晕 -->
   <div id="ambient">
     <div class="orb"></div>
     <div class="orb"></div>
     <div class="orb"></div>
   </div>
 
-  <!-- Top Bar -->
+  <!-- 顶部栏 -->
   <div id="topbar">
     <div class="brand">
-      <div class="brand-logo">W</div>
+      <div class="brand-logo">控</div>
       <div>
         <div class="brand-name">WebUI</div>
-        <div class="brand-sub">Remote Control</div>
+        <div class="brand-sub">远程控制</div>
       </div>
     </div>
     <div class="spacer"></div>
     <div class="conn-pill">
       <span class="conn-dot" id="conn-dot"></span>
-      <span class="conn-text" id="conn-text">Connecting</span>
+      <span class="conn-text" id="conn-text">连接中</span>
     </div>
-    <button class="icon-btn" onclick="onRefresh()" title="Refresh">
+    <button class="icon-btn" onclick="onRefresh()" title="刷新">
       <svg id="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 12a9 9 0 1 0-9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
         <path d="M21 3v5h-5"/>
@@ -637,10 +777,10 @@
     </button>
   </div>
 
-  <!-- Tabs -->
+  <!-- 标签栏 -->
   <nav id="tabs"></nav>
 
-  <!-- Main -->
+  <!-- 主区域 -->
   <main>
     <div class="cat-header" id="cat-header">
       <h2 id="cat-title"></h2>
@@ -649,12 +789,12 @@
     <div class="module-grid" id="module-grid"></div>
   </main>
 
-  <!-- Dialog -->
+  <!-- 弹窗 -->
   <div id="dialog-backdrop">
     <div id="dialog">
       <div class="dialog-hdr">
         <div>
-          <div class="dialog-hdr-text">Module Settings</div>
+          <div class="dialog-hdr-text">模块设置</div>
           <div class="dialog-hdr-title" id="dialog-title"></div>
         </div>
         <button class="icon-btn" onclick="closeDialog()">
@@ -665,12 +805,12 @@
       </div>
       <div class="dialog-body" id="dialog-body"></div>
       <div class="dialog-ftr">
-        <button class="btn-primary" onclick="closeDialog()">Done</button>
+        <button class="btn-primary" onclick="closeDialog()">完成</button>
       </div>
     </div>
   </div>
 
-  <!-- Snackbar -->
+  <!-- 轻提示 -->
   <div id="snackbar"></div>
 
   <script>
@@ -679,7 +819,7 @@
     let moduleCache = {};
     let snackbarTimer;
 
-    // ===== Refresh =====
+    // ===== 刷新 =====
     function onRefresh() {
       const icon = document.getElementById('refresh-icon');
       icon.style.transition = 'transform 0.6s';
@@ -687,7 +827,7 @@
       setTimeout(() => location.reload(), 400);
     }
 
-    // ===== Snackbar =====
+    // ===== 轻提示 =====
     function snackbar(msg, isError) {
       const el = document.getElementById('snackbar');
       el.textContent = msg;
@@ -701,10 +841,10 @@
       const t = document.getElementById('conn-text');
       d.className = 'conn-dot ' + (ok ? 'on' : 'off');
       t.className = 'conn-text ' + (ok ? 'on' : 'off');
-      t.textContent = ok ? 'Connected' : 'Disconnected';
+      t.textContent = ok ? '已连接' : '已断开';
     }
 
-    // ===== Tabs =====
+    // ===== 标签 =====
     function addCategory(name) {
       const tabs = document.getElementById('tabs');
       const btn = document.createElement('button');
@@ -727,7 +867,7 @@
       }, 80);
     }
 
-    // ===== Card =====
+    // ===== 卡片构建 =====
     function buildCard(name, desc, enabled, hasSettings) {
       const card = document.createElement('div');
       card.className = 'module-card' + (enabled ? ' enabled' : '');
@@ -736,20 +876,21 @@
       card.innerHTML =
         '<div class="card-glow"></div>' +
         '<div class="card-row1">' +
-          '<span class="card-name">' + name + '</span>' +
-          (hasSettings
-            ? '<button class="gear-btn" data-module="' + name + '">' +
-              '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
-              '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>' +
-              '</svg></button>'
-            : '') +
+        '<span class="card-name">' + name + '</span>' +
+        (hasSettings ?
+          '<button class="gear-btn" data-module="' + name + '">' +
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+          '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>' +
+          '</svg></button>' :
+          '') +
         '</div>' +
         '<div class="card-row2">' +
-          '<span class="status-tag ' + (enabled ? 'on' : 'off') + '">' + (enabled ? 'Enabled' : 'Disabled') + '</span>' +
-          '<label class="toggle">' +
-            '<input type="checkbox" ' + (enabled ? 'checked' : '') + ' onchange="onToggle(this)" data-module-name="' + name + '" />' +
-            '<div class="toggle-track"><div class="toggle-thumb"></div></div>' +
-          '</label>' +
+        '<span class="status-tag ' + (enabled ? 'on' : 'off') + '">' + (enabled ? '已启用' : '已停用') + '</span>' +
+        '<label class="toggle">' +
+        '<input type="checkbox" ' + (enabled ? 'checked' : '') + ' onchange="onToggle(this)" data-module-name="' + name +
+        '" />' +
+        '<div class="toggle-track"><div class="toggle-thumb"></div></div>' +
+        '</label>' +
         '</div>';
 
       const gear = card.querySelector('.gear-btn');
@@ -763,13 +904,13 @@
       return card;
     }
 
-    // ===== Render / patch =====
+    // ===== 渲染 / 增量更新 =====
     function renderModules(modules) {
       const grid = document.getElementById('module-grid');
       grid.innerHTML = '';
       moduleCache = {};
       const names = Object.keys(modules);
-      document.getElementById('module-count').textContent = names.length + ' modules';
+      document.getElementById('module-count').textContent = names.length + ' 个模块';
       names.forEach(name => {
         const m = modules[name];
         moduleCache[name] = { state: m.state };
@@ -778,7 +919,8 @@
       requestAnimationFrame(() => {
         document.querySelectorAll('.module-card').forEach((el, i) => {
           setTimeout(() => {
-            el.style.transition = 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.3s, background 0.25s, box-shadow 0.3s';
+            el.style.transition =
+              'opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.3s, background 0.25s, box-shadow 0.3s';
             el.classList.add('entered');
           }, i * 35);
         });
@@ -789,7 +931,8 @@
       const names = Object.keys(modules);
       const cached = Object.keys(moduleCache);
       if (names.length !== cached.length || names.some(n => !moduleCache[n])) {
-        renderModules(modules); return;
+        renderModules(modules);
+        return;
       }
       names.forEach(name => {
         const ns = modules[name].state;
@@ -801,40 +944,45 @@
         const cb = card.querySelector('input[type="checkbox"]');
         const tag = card.querySelector('.status-tag');
         if (cb) cb.checked = ns;
-        if (tag) { tag.textContent = ns ? 'Enabled' : 'Disabled'; tag.className = 'status-tag ' + (ns ? 'on' : 'off'); }
+        if (tag) { tag.textContent = ns ? '已启用' : '已停用';
+          tag.className = 'status-tag ' + (ns ? 'on' : 'off'); }
         card.classList.toggle('enabled', !!ns);
       });
     }
 
-    // ===== Toggle =====
+    // ===== 切换开关 =====
     function onToggle(input) {
       const name = input.dataset.moduleName;
       $.ajax({
         url: '/api/setStatus?module=' + name + '&state=' + input.checked,
-        type: 'GET', dataType: 'json',
+        type: 'GET',
+        dataType: 'json',
         success: res => {
           if (res.success) {
             input.checked = res.result;
             if (moduleCache[name]) moduleCache[name].state = res.result;
             const card = input.closest('.module-card');
             const tag = card.querySelector('.status-tag');
-            tag.textContent = res.result ? 'Enabled' : 'Disabled';
+            tag.textContent = res.result ? '已启用' : '已停用';
             tag.className = 'status-tag ' + (res.result ? 'on' : 'off');
             card.classList.toggle('enabled', !!res.result);
-          } else { snackbar(res.reason, true); input.checked = !input.checked; }
+          } else { snackbar(res.reason, true);
+            input.checked = !input.checked; }
         },
-        error: () => { snackbar('Failed to connect.', true); input.checked = !input.checked; }
+        error: () => { snackbar('连接失败。', true);
+          input.checked = !input.checked; }
       });
     }
 
-    // ===== Dialog =====
+    // ===== 弹窗 =====
     function closeDialog() { document.getElementById('dialog-backdrop').classList.remove('open'); }
 
     function openSettings(gear) {
       const modName = gear.dataset.module;
       $.ajax({
         url: '/api/getModuleSetting?module=' + modName,
-        type: 'GET', dataType: 'json',
+        type: 'GET',
+        dataType: 'json',
         success: res => {
           if (!res.success) { snackbar(res.reason, true); return; }
           document.getElementById('dialog-title').textContent = modName;
@@ -847,7 +995,8 @@
                 row.className = 'setting-row';
                 row.innerHTML = '<span class="setting-label">' + setting.displayName + '</span>' +
                   '<label class="toggle"><input type="checkbox" ' + (setting.value ? 'checked' : '') +
-                  ' onchange="onSettingChange(this)" data-module="' + modName + '" data-setting="' + setting.name + '" />' +
+                  ' onchange="onSettingChange(this)" data-module="' + modName + '" data-setting="' + setting
+                  .name + '" />' +
                   '<div class="toggle-track"><div class="toggle-thumb"></div></div></label>';
                 break;
               case 'slider':
@@ -855,16 +1004,20 @@
                 const vid = modName + '-' + setting.name + '-v';
                 row.innerHTML = '<div class="slider-hdr"><span class="setting-label">' + setting.displayName +
                   '</span><span class="slider-val" id="' + vid + '">' + setting.value + '</span></div>' +
-                  '<input type="range" value="' + setting.value + '" max="' + setting.max + '" min="' + setting.min +
-                  '" step="' + setting.step + '" oninput="document.getElementById(\'' + vid + '\').textContent=this.value"' +
-                  ' onchange="onSettingChange(this)" data-module="' + modName + '" data-setting="' + setting.name + '" />';
+                  '<input type="range" value="' + setting.value + '" max="' + setting.max + '" min="' + setting
+                  .min +
+                  '" step="' + setting.step + '" oninput="document.getElementById(\'' + vid +
+                  '\').textContent=this.value"' +
+                  ' onchange="onSettingChange(this)" data-module="' + modName + '" data-setting="' + setting
+                  .name + '" />';
                 break;
               case 'selection':
                 row.className = 'setting-group';
                 row.innerHTML = '<span class="setting-label" style="margin-bottom:2px">' + setting.displayName +
                   '</span><select class="m3-select" onchange="onSettingChange(this)" data-module="' + modName +
                   '" data-setting="' + setting.name + '">' +
-                  setting.values.map(v => '<option' + (v == setting.value ? ' selected' : '') + '>' + v + '</option>').join('') +
+                  setting.values.map(v => '<option' + (v == setting.value ? ' selected' : '') + '>' + v +
+                    '</option>').join('') +
                   '</select>';
                 break;
             }
@@ -872,20 +1025,22 @@
           });
           document.getElementById('dialog-backdrop').classList.add('open');
         },
-        error: () => snackbar('Failed to connect.', true)
+        error: () => snackbar('连接失败。', true)
       });
     }
 
     function onSettingChange(el) {
       const val = el.type === 'checkbox' ? el.checked : el.value;
       $.ajax({
-        url: '/api/setModuleSettingValue?module=' + el.dataset.module + '&name=' + el.dataset.setting + '&value=' + val,
-        type: 'GET', dataType: 'json',
+        url: '/api/setModuleSettingValue?module=' + el.dataset.module + '&name=' + el.dataset.setting + '&value=' +
+          val,
+        type: 'GET',
+        dataType: 'json',
         success: res => {
-          if (res.success) { if (el.type === 'checkbox') el.checked = res.result; else el.value = res.result; }
-          else snackbar(res.reason, true);
+          if (res.success) { if (el.type === 'checkbox') el.checked = res.result;
+            else el.value = res.result; } else snackbar(res.reason, true);
         },
-        error: () => snackbar('Failed to connect.', true)
+        error: () => snackbar('连接失败。', true)
       });
     }
 
@@ -893,28 +1048,31 @@
       if (e.target === e.currentTarget) closeDialog();
     });
 
-    // ===== Category loading =====
+    // ===== 分类加载 =====
     function loadCategory(noAnim) {
       let cat = location.hash.substr(1);
       const qi = cat.indexOf('?');
       if (qi !== -1) cat = cat.substr(0, qi);
       if (!allCategories.includes(cat)) { location.hash = '#' + (allCategories[0] || ''); return; }
       const changed = cat !== currentCategory;
-      if (changed) { currentCategory = cat; updateActiveNav(cat); }
+      if (changed) { currentCategory = cat;
+        updateActiveNav(cat); }
       $.ajax({
         url: '/api/modulesList?category=' + cat,
-        type: 'GET', dataType: 'json',
+        type: 'GET',
+        dataType: 'json',
         success: res => {
-          if (res.success) { (changed || !noAnim) ? renderModules(res.result) : patchModules(res.result); }
-          else snackbar(res.reason, true);
+          if (res.success) { (changed || !noAnim) ? renderModules(res.result): patchModules(res.result); } else
+            snackbar(res.reason, true);
         }
       });
     }
 
-    // ===== Init =====
+    // ===== 初始化 =====
     $.ajax({
       url: '/api/categoriesList',
-      type: 'GET', dataType: 'json',
+      type: 'GET',
+      dataType: 'json',
       success: res => {
         setConnected(true);
         if (!res.success) { snackbar(res.reason, true); return; }
@@ -929,9 +1087,11 @@
         loadCategory(false);
         setInterval(() => loadCategory(true), 5000);
       },
-      error: () => { setConnected(false); snackbar('Failed to connect to client.', true); }
+      error: () => { setConnected(false);
+        snackbar('无法连接到客户端。', true); }
     });
   </script>
+
 </body>
 
 </html>
